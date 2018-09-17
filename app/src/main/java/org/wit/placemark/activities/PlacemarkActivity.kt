@@ -22,13 +22,15 @@ class PlacemarkActivity : AppCompatActivity(), AnkoLogger {
 
     btnAdd.setOnClickListener() {
       placemark.title = placemarkTitle.text.toString()
-      if (placemark.title.isNotEmpty()) {
+      placemark.description = placemarkDescription.text.toString()
+
+      if (placemark.title.isNotEmpty() && placemark.description.isNotEmpty()) {
         placemarks.add(placemark)
-        info("add Button Pressed: $placemarkTitle")
+        info("add Button Pressed: Title: $placemarkTitle Description: $placemarkDescription")
         info("This is the placemarks arraylist: $placemarks")
       }
       else {
-        toast ("Please Enter a title")
+        toast ("Please enter a title and description")
       }
     }
   }
