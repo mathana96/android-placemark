@@ -7,27 +7,28 @@ import org.jetbrains.anko.AnkoLogger
 import org.jetbrains.anko.info
 import org.jetbrains.anko.toast
 import org.wit.placemark.R
+import org.wit.placemark.main.MainApp
 import org.wit.placemark.models.PlacemarkModel
 
 
 class PlacemarkActivity : AppCompatActivity(), AnkoLogger {
 
   var placemark = PlacemarkModel()
-  val placemarks = ArrayList<PlacemarkModel>()
+  lateinit var app : MainApp
 
   override fun onCreate(savedInstanceState: Bundle?) {
     super.onCreate(savedInstanceState)
     setContentView(R.layout.activity_placemark)
-    info("Placemark Activity started..")
+    app = application as MainApp
 
     btnAdd.setOnClickListener() {
       placemark.title = placemarkTitle.text.toString()
       placemark.description = placemarkDescription.text.toString()
 
       if (placemark.title.isNotEmpty() && placemark.description.isNotEmpty()) {
-        placemarks.add(placemark)
+        app.placemarks.add(placemark.copy())
         info("add Button Pressed: Title: $placemarkTitle Description: $placemarkDescription")
-        info("This is the placemarks arraylist: $placemarks")
+        app.placemarks.forEach { info("add Button pressed: $it") }
       }
       else {
         toast ("Please enter a title and description")
