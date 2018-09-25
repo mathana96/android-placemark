@@ -3,6 +3,7 @@ package org.wit.placemark.activities
 import android.os.Bundle
 import android.support.v7.app.AppCompatActivity
 import kotlinx.android.synthetic.main.activity_placemark.*
+import kotlinx.android.synthetic.main.activity_placemark_list.*
 import org.jetbrains.anko.AnkoLogger
 import org.jetbrains.anko.info
 import org.jetbrains.anko.toast
@@ -20,6 +21,7 @@ class PlacemarkActivity : AppCompatActivity(), AnkoLogger {
     super.onCreate(savedInstanceState)
     setContentView(R.layout.activity_placemark)
     app = application as MainApp
+    toolbarAdd.title = title
 
     btnAdd.setOnClickListener() {
       placemark.title = placemarkTitle.text.toString()
