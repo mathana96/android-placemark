@@ -29,6 +29,8 @@ class PlacemarkActivity : AppCompatActivity(), AnkoLogger {
         app.placemarks.add(placemark.copy())
         info("add Button Pressed: Title: $placemarkTitle Description: $placemarkDescription")
         app.placemarks.forEach { info("add Button pressed: $it") }
+        setResult(AppCompatActivity.RESULT_OK)
+        finish()
       }
       else {
         toast ("Please enter a title and description")
