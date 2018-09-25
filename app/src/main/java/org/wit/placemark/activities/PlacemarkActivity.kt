@@ -2,12 +2,14 @@ package org.wit.placemark.activities
 
 import android.os.Bundle
 import android.support.v7.app.AppCompatActivity
+import android.view.Menu
 import kotlinx.android.synthetic.main.activity_placemark.*
 import kotlinx.android.synthetic.main.activity_placemark_list.*
 import org.jetbrains.anko.AnkoLogger
 import org.jetbrains.anko.info
 import org.jetbrains.anko.toast
 import org.wit.placemark.R
+import org.wit.placemark.R.id.*
 import org.wit.placemark.main.MainApp
 import org.wit.placemark.models.PlacemarkModel
 
@@ -22,6 +24,7 @@ class PlacemarkActivity : AppCompatActivity(), AnkoLogger {
     setContentView(R.layout.activity_placemark)
     app = application as MainApp
     toolbarAdd.title = title
+    setSupportActionBar(toolbarAdd)
 
     btnAdd.setOnClickListener() {
       placemark.title = placemarkTitle.text.toString()
@@ -38,5 +41,10 @@ class PlacemarkActivity : AppCompatActivity(), AnkoLogger {
         toast ("Please enter a title and description")
       }
     }
+  }
+
+  override fun onCreateOptionsMenu(menu: Menu?): Boolean {
+    menuInflater.inflate(R.menu.menu_cancel, menu)
+    return super.onCreateOptionsMenu(menu)
   }
 }
