@@ -1,9 +1,11 @@
 package org.wit.placemark.activities
 
 import android.os.Bundle
+import android.support.v4.app.ActivityCompat.startActivityForResult
 import android.support.v7.app.AppCompatActivity
 import android.view.Menu
 import android.view.MenuItem
+import android.view.View
 import kotlinx.android.synthetic.main.activity_placemark.*
 import kotlinx.android.synthetic.main.activity_placemark_list.*
 import org.jetbrains.anko.AnkoLogger
@@ -39,17 +41,29 @@ class PlacemarkActivity : AppCompatActivity(), AnkoLogger {
       placemark.title = placemarkTitle.text.toString()
       placemark.description = placemarkDescription.text.toString()
 
-      if (placemark.title.isNotEmpty() && placemark.description.isNotEmpty()) {
-        app.placemarks.create(placemark.copy())
-        info("add Button Pressed: Title: $placemarkTitle Description: $placemarkDescription")
-        setResult(AppCompatActivity.RESULT_OK)
-        finish()
+
+
+        if (placemark.title.isNotEmpty() && placemark.description.isNotEmpty()) {
+          val defaultTitle: String = getString(R.string.hint_placemarkTitle)
+          val defaultDesc: String = getString(R.string.hint_placemarkDescription)
+
+          if (intent.hasExtra("placemark_edit")) {
+            app.placemarks.update(placemark)
+            info("Update Button Pressed: Title: $placemarkTitle Description: $placemarkDescription")
+          }
+          else {
+            app.placemarks.create(placemark.copy())
+            info("Create Button Pressed: Title: $placemarkTitle Description: $placemarkDescription")
+          }
+          setResult(AppCompatActivity.RESULT_OK)
+          finish()
+        }
+        else {
+          val toastTitleDesc: String = getString(R.string.toast_enterTitleandDesc)
+          toast (toastTitleDesc)
+        }
+
       }
-      else {
-        val toastTitleDesc: String = getString(R.string.toast_enterTitleandDesc)
-        toast (toastTitleDesc)
-      }
-    }
   }
 
   override fun onCreateOptionsMenu(menu: Menu?): Boolean {
