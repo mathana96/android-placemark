@@ -32,6 +32,8 @@ class PlacemarkActivity : AppCompatActivity(), AnkoLogger {
       placemark = intent.extras.getParcelable<PlacemarkModel>("placemark_edit")
       placemarkTitle.setText(placemark.title)
       placemarkDescription.setText(placemark.description)
+      val savePlacemark: String = getString(R.string.button_savePlacemark)
+      btnAdd.text = savePlacemark
     }
     btnAdd.setOnClickListener() {
       placemark.title = placemarkTitle.text.toString()
