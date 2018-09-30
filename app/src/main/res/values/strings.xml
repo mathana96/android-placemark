@@ -4,4 +4,5 @@
   <string name="hint_placemarkDescription">Placemark Description</string>
   <string name="button_addPlacemark">Add Placemark</string>
   <string name="menu_addPlacemark">Add</string>
+  <string name="toast_enterTitleandDesc">Please enter a title and description</string>
 </resources>

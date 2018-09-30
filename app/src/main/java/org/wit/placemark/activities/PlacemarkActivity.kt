@@ -44,7 +44,8 @@ class PlacemarkActivity : AppCompatActivity(), AnkoLogger {
         finish()
       }
       else {
-        toast ("Please enter a title and description")
+        val toastTitleDesc: String = getString(R.string.toast_enterTitleandDesc)
+        toast (toastTitleDesc)
       }
     }
   }
