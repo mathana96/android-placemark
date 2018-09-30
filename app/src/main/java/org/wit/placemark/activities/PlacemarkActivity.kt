@@ -28,14 +28,18 @@ class PlacemarkActivity : AppCompatActivity(), AnkoLogger {
     toolbarAdd.title = title
     setSupportActionBar(toolbarAdd)
 
+    if (intent.hasExtra("placemark_edit")) {
+      placemark = intent.extras.getParcelable<PlacemarkModel>("placemark_edit")
+      placemarkTitle.setText(placemark.title)
+      placemarkDescription.setText(placemark.description)
+    }
     btnAdd.setOnClickListener() {
       placemark.title = placemarkTitle.text.toString()
       placemark.description = placemarkDescription.text.toString()
 
       if (placemark.title.isNotEmpty() && placemark.description.isNotEmpty()) {
-        app.placemarks.add(placemark.copy())
+        app.placemarks.create(placemark.copy())
         info("add Button Pressed: Title: $placemarkTitle Description: $placemarkDescription")
-        app.placemarks.forEach { info("add Button pressed: $it") }
         setResult(AppCompatActivity.RESULT_OK)
         finish()
       }
